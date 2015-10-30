@@ -1,0 +1,14 @@
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\DHU.Infrastructure.dll.config
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\DHU.Infrastructure.dll
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\DHU.Infrastructure.pdb
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\EntityFramework.dll
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\Microsoft.AspNet.Identity.Core.dll
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.dll
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\EntityFramework.xml
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\Microsoft.AspNet.Identity.Core.xml
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\bin\Debug\Microsoft.AspNet.Identity.EntityFramework.xml
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\obj\Debug\DHU.Infrastructure.dll
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\obj\Debug\DHU.Infrastructure.pdb
+C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\obj\Debug\DHU.Infrastructure.csprojResolveAssemblyReference.cache

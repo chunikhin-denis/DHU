@@ -1,0 +1,105 @@
+﻿<div class="row">
+    <div class="col-md-11">
+        <h1 class="inline oxford ">
+            Hello, Alumnus!
+        </h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-11 m-25">
+        <div class="row profileInfo">
+            <div class="row">
+                <div class="col-md-7 col-xs-12 border-bottom-1 border-right-1 p-0">
+                    <h2 class="oxford p-l-25 m-b-20">Recent News</h2>
+                    <ul class="list-horizontal-tile p-l-5 p-r-5">
+                        <li class="text-center p-l-5 p-r-5" data-ng-repeat="news in homeInfo.LatestNews">
+                            <a href="News/{{news.Id}}" class="col-md-12 no-decoration p-l-0 p-r-0">
+                                <div class="pull-left label-date absolute" style="left:0">
+                                    <span class="block f-s-14 oxford blue text-center p-b-3">
+                                        {{news.PostedOn | date: 'MMM' | uppercase}}
+                                    </span>
+                                    <h2 class="block oxford text-center m-t-min-5 bg-white blue">
+                                        {{news.PostedOn | date: 'dd' }}
+                                    </h2>
+                                </div>
+                                <img data-ng-src="{{news.Photo}}" class="width-full" style="left:0" />
+                                <h4 class="row f-s-12 m-t-15 m-b-20">
+                                    {{news.Title}}
+                                </h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-5 col-xs-12 border-left-1">
+                    <h2 class="oxford text-center">Latest registered users</h2>
+                    <ul class="list-vertical">
+                        <li data-ng-repeat="user in homeInfo.LatestRegistedUsers">
+                            <div class="row m-5">
+                                <div class="col-md-10 col-xs-10">
+                                    <img class="img-circle img-size-40 float-l" src="~/Images/nophoto.jpg" data-ng-src="{{user.Photo}}">
+                                    <a href="/Profile/{{user.Id}}" class="no-decoration text-black m-l-10 inline-block" data-ng-show="$root.university.IsUserApproved">
+                                        <h4 class="m-t-5 m-b-3 f-s-16">{{user.FullName}}</h4>
+                                        <span class="block grey f-s-12">{{user.Job}}</span>
+                                    </a>
+                                    <span class="no-decoration text-black m-l-10 inline-block" data-ng-hide="university.IsUserApproved">
+                                        <h4 class="m-t-5 m-b-3 f-s-16">{{user.FullName}}</h4>
+                                        <span class="block grey f-s-12">{{user.Job}}</span>
+                                    </span>
+                                </div>
+                                <div class="col-md-2 col-xs-2 p-l-0 p-r-0" data-ng-show="user.GraduationYear != 0">
+                                    <h3 class="blue m-5 f-s-20 pull-right p-t-5">'{{user.GraduationYear.toString().substring(2)}}</h3>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-7 col-xs-12 border-right-1 p-0">
+                    <h2 class="oxford p-l-25 m-b-20">Recent Events</h2>
+                    <ul class="list-horizontal-tile p-l-5 p-r-5">
+                        <li class="text-center p-l-5 p-r-5" data-ng-repeat="event in homeInfo.LatestEvents">
+                            <a href="Event/{{event.Id}}" class="col-md-12 no-decoration p-l-5 p-r-5">
+                                <div class="label-date m-b-0">
+                                    <span class="block oxford blue text-center f-s-14 p-b-3">
+                                        {{event.StartAt | date: 'MMM' | uppercase}}
+                                    </span>
+                                    <h2 class="block oxford text-center m-t-min-5 bg-white blue m-b-0">
+                                        {{event.StartAt | date: 'dd' }}
+                                    </h2>
+                                </div>
+                                <img data-ng-src="{{event.Photo}}" class="width-full circular-full" style="left:0" />
+                                <h4 class="f-s-12">
+                                    {{event.Title}}
+                                </h4>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-5 col-xs-12 border-left-1">
+                    <h2 class="oxford text-center">Latest Job Posts</h2>
+                    <ul class="list-vertical">
+                        <li data-ng-repeat="offer in homeInfo.LatestJobsOffers">
+                            <div class="col-md-12 col-xs-12 p-r-0">
+                                <div class="col-md-12 m-t-10 pull-left p-l-0 p-r-0">
+                                    <div class="float-l">
+                                        <span class="block f-s-14 oxford text-center">{{offer.Posted | date: 'MMM' | uppercase}}</span>
+                                        <h2 class="block oxford text-center m-t-min-5 blue">{{offer.Posted | date: 'dd' }}</h2>
+                                    </div>
+                                    <div class="m-l-10 inline-block m-t-min-2">
+                                        <h4 class="m-t-5 m-b-3 f-s-14">
+                                            <a href="Job/{{offer.OfferId}}" class="no-decoration text-black" data-ng-show="$root.university.IsUserApproved">{{offer.Title}}</a>
+                                            <span class="no-decoration text-black" data-ng-hide="$root.university.IsUserApproved">{{offer.Title}}</span>
+                                        </h4>
+                                        <span class="block grey f-s-12">{{offer.Company}}</span>
+                                        <span class="block f-s-12 grey">{{offer.Location}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

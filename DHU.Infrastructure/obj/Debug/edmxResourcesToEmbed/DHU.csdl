@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DHUModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Category">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="ParentId" Type="Int32" />
+    <NavigationProperty Name="Categories1" Relationship="DHUModel.FK_Category_ParentCategory" FromRole="Category" ToRole="Category1" />
+    <NavigationProperty Name="Category1" Relationship="DHUModel.FK_Category_ParentCategory" FromRole="Category1" ToRole="Category" />
+    <NavigationProperty Name="Products" Relationship="DHUModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="Currency">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="CurrencyRates" Relationship="DHUModel.FK_CurrencyRate_Currency" FromRole="Currency" ToRole="CurrencyRate" />
+    <NavigationProperty Name="Products" Relationship="DHUModel.FK_Product_Currency" FromRole="Currency" ToRole="Product" />
+  </EntityType>
+  <EntityType Name="CurrencyRate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+    <Property Name="Rate" Type="Double" Nullable="false" />
+    <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Currency" Relationship="DHUModel.FK_CurrencyRate_Currency" FromRole="CurrencyRate" ToRole="Currency" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CategoryId" Type="Int32" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsInStock" Type="Boolean" Nullable="false" />
+    <Property Name="Price" Type="Double" />
+    <Property Name="CurrencyId" Type="Int32" />
+    <NavigationProperty Name="Category" Relationship="DHUModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
+    <NavigationProperty Name="Currency" Relationship="DHUModel.FK_Product_Currency" FromRole="Product" ToRole="Currency" />
+  </EntityType>
+  <EntityContainer Name="DHUEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Currencies" EntityType="Self.Currency" />
+    <EntitySet Name="CurrencyRates" EntityType="Self.CurrencyRate" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <AssociationSet Name="FK_Category_ParentCategory" Association="DHUModel.FK_Category_ParentCategory">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Category1" EntitySet="Categories" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Category" Association="DHUModel.FK_Product_Category">
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CurrencyRate_Currency" Association="DHUModel.FK_CurrencyRate_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="CurrencyRate" EntitySet="CurrencyRates" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Product_Currency" Association="DHUModel.FK_Product_Currency">
+      <End Role="Currency" EntitySet="Currencies" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+  </EntityContainer>
+  <Association Name="FK_Category_ParentCategory">
+    <End Type="DHUModel.Category" Role="Category" Multiplicity="0..1" />
+    <End Type="DHUModel.Category" Role="Category1" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Category1">
+        <PropertyRef Name="ParentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Category">
+    <End Type="DHUModel.Category" Role="Category" Multiplicity="1" />
+    <End Type="DHUModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Category">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CurrencyRate_Currency">
+    <End Type="DHUModel.Currency" Role="Currency" Multiplicity="1" />
+    <End Type="DHUModel.CurrencyRate" Role="CurrencyRate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CurrencyRate">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Product_Currency">
+    <End Type="DHUModel.Currency" Role="Currency" Multiplicity="0..1" />
+    <End Type="DHUModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Currency">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
