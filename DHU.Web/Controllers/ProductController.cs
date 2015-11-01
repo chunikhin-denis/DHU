@@ -7,7 +7,7 @@ using DHU.Infrastructure.Interfaces;
 
 namespace DHU.Web.Controllers
 {
-    public class HomeController : Controller
+    public class ProductController : Controller
     {
         #region Declarations
 
@@ -17,14 +17,14 @@ namespace DHU.Web.Controllers
 
         #region Ctors
 
-        public HomeController(IProductRepository productRepository)
+        public ProductController(IProductRepository productRepository)
         {
             _productRepository = productRepository;
         }
 
         #endregion
 
-        public ActionResult Index()
+        public ActionResult Top()
         {
             var a = _productRepository.Get();
             return View();

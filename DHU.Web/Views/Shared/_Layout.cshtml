@@ -28,24 +28,39 @@
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                <div class="logo">
+                    <a href="/Products/Top">
+                        asdasd
+                    </a>
+                </div>
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+            <div class="dnipro"></div>
+            <div class="phones pull-right">
+                <ul >
+                    <li>
+                        <img src="~/Content/Frontend/Images/kyivstar.png" alt="Київстар" />
+                        <span> 067 284 35 29</span>
+                    </li>
+                    <li><img src="~/Content/Frontend/Images/vodafone.png"  alt="Vodafone"/>
+                        <span> 050 786 27 51</span>
+                    </li>
+                    <li>
+                        <img src="~/Content/Frontend/Images/phone.png" alt="Городской телефон" />
+                        <span> 056 371 17 61</span>
+                    </li>
                 </ul>
             </div>
         </div>
+    </div>
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li>@Html.ActionLink("Home", "Index", "Home")</li>
+            <li>@Html.ActionLink("About", "About", "Home")</li>
+            <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+        </ul>
     </div>
     <div class="container body-content">
         @RenderBody()

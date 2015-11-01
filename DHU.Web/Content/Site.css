@@ -1,24 +1,60 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿* {
+    font-family: 'Oxford';
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+/*Layout*/
+.navbar.navbar-inverse {
+    background-image: url('Frontend/Images/header_back.jpg');
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    color: white;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.dnipro {
+    background-image: url('Frontend/Images/dhu.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100px;
+    width: 55%;
+    margin-left: 120px;
+    display: inline-block;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.logo {
+    top: -10px;
+    position: absolute;
+    margin-left: 20px;
 }
+
+    .logo a {
+        background-image: url('Frontend/Images/Logo.png');
+        height: 100px;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center center;
+        width: 100px;
+        display: block;
+    }
+
+.phones {
+    display: inline-block;
+        position: relative;
+        font-size:16px
+}
+
+    .phones ul {
+        list-style-type: none;
+    }
+
+    .phones li {
+        margin-top:10px;
+    }
+
+    .phones img {
+        width: 20px;
+        height: 20px;
+    }
+/*End Layout*/
