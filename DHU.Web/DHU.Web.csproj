@@ -232,10 +232,15 @@
     <Content Include="Content\Frontend\animate.css" />
     <Content Include="Content\Frontend\animate.min.css" />
     <Content Include="Content\Frontend\Images\dhu.png" />
+    <Content Include="Content\Frontend\Images\dow_corning.jpg" />
     <Content Include="Content\Frontend\Images\header_back.jpg" />
     <Content Include="Content\Frontend\Images\kyivstar.png" />
     <Content Include="Content\Frontend\Images\Logo.png" />
+    <Content Include="Content\Frontend\Images\molykote.jpg" />
+    <Content Include="Content\Frontend\Images\molykote_mini.jpg" />
+    <Content Include="Content\Frontend\Images\permabond.jpg" />
     <Content Include="Content\Frontend\Images\phone.png" />
+    <Content Include="Content\Frontend\Images\snivel.png" />
     <Content Include="Content\Frontend\Images\vodafone.png" />
     <Content Include="Content\Frontend\invoice-print.css" />
     <Content Include="Content\Frontend\invoice-print.min.css" />
@@ -1749,12 +1754,15 @@
       <DependentUpon>Web.config</DependentUpon>
     </Content>
     <Content Include="Views\Web.config" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Product\About.cshtml" />
-    <Content Include="Views\Product\Contact.cshtml" />
-    <Content Include="Views\Product\Top.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <None Include="Views\Product\Molykote.cshtml" />
+    <Content Include="Views\Product\PaymentShipping.cshtml" />
+    <None Include="Views\Product\Permabond.cshtml" />
+    <Content Include="Views\Product\Products.cshtml" />
+    <None Include="Views\Product\Top.cshtml" />
+    <None Include="Views\Product\DowCorning.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

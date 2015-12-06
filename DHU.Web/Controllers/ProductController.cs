@@ -24,12 +24,50 @@ namespace DHU.Web.Controllers
 
         #endregion
 
-        public ActionResult Top()
+        public ActionResult Index()
         {
-            var a = _productRepository.Get();
             return View();
         }
 
+        public ActionResult Top()
+        {
+            var a = _productRepository.Get();
+                return View();
+        }
+
+        public ActionResult Molykote()
+        {
+            var a = _productRepository.Get();
+                return View();
+
+        }
+
+        public ActionResult DowCorning()
+        {
+            var a = _productRepository.Get();
+
+                return View();
+
+        }
+
+        public ActionResult Permabond()
+        {
+                return View();
+
+        }
+
+        public ActionResult Products()
+        {
+
+                return View();
+
+        }
+
+        public ActionResult PaymentShipping()
+        {
+                return View();
+
+        }
 
         public ActionResult About()
         {

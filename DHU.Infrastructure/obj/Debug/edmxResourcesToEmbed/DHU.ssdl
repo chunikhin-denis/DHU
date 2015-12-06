@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DHUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Brands">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+  </EntityType>
   <EntityType Name="Categories">
     <Key>
       <PropertyRef Name="Id" />
@@ -33,10 +41,12 @@
     <Property Name="Id" Type="int" Nullable="false" />
     <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
     <Property Name="CategoryId" Type="int" Nullable="false" />
+    <Property Name="BrandId" Type="int" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="IsInStock" Type="bit" Nullable="false" />
     <Property Name="Price" Type="float" />
     <Property Name="CurrencyId" Type="int" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="FK_Category_ParentCategory">
     <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
@@ -86,7 +96,20 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Products_Brands">
+    <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+    <End Role="Products" Type="Self.Products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brands">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Products">
+        <PropertyRef Name="BrandId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="DHUModelStoreContainer">
+    <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CurrencyRates" EntityType="Self.CurrencyRates" Schema="dbo" store:Type="Tables" />
@@ -105,6 +128,10 @@
     </AssociationSet>
     <AssociationSet Name="FK_Product_Currency" Association="Self.FK_Product_Currency">
       <End Role="Currencies" EntitySet="Currencies" />
+      <End Role="Products" EntitySet="Products" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Products_Brands" Association="Self.FK_Products_Brands">
+      <End Role="Brands" EntitySet="Brands" />
       <End Role="Products" EntitySet="Products" />
     </AssociationSet>
   </EntityContainer>

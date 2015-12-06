@@ -12,20 +12,19 @@ namespace DHU.Infrastructure
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Brand
     {
-        public int Id { get; set; }
-        public string Title { get; set; }
-        public int CategoryId { get; set; }
-        public bool IsActive { get; set; }
-        public bool IsInStock { get; set; }
-        public Nullable<double> Price { get; set; }
-        public Nullable<int> CurrencyId { get; set; }
-        public int BrandId { get; set; }
-        public string State { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Brand()
+        {
+            this.Products = new HashSet<Product>();
+        }
     
-        public virtual Category Category { get; set; }
-        public virtual Currency Currency { get; set; }
-        public virtual Brand Brand { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public bool IsActive { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Product> Products { get; set; }
     }
 }

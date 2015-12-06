@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\dchunikhin\Documents\Visual Studio 2013\Projects\DHU\DHU.Infrastructure\DHU.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\Denis\documents\visual studio 2013\Projects\DHU\DHU.Infrastructure\DHU.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

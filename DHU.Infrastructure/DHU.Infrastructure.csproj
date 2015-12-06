@@ -56,6 +56,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Brand.cs">
+      <DependentUpon>DHU.tt</DependentUpon>
+    </Compile>
     <Compile Include="Category.cs">
       <DependentUpon>DHU.tt</DependentUpon>
     </Compile>

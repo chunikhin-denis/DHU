@@ -1,21 +1,81 @@
 ﻿'use strict';
 
-//angular.module('application.controllers', ['ui.router', 'LocalStorageModule', 'app.services', 'angularFileUpload', 'ngSanitize'])
+angular.module('app.controllers', ['app.services'])
+    /// Controllers
 
-//    /// Controllers
+    .controller('TopController', ['$scope', '$rootScope','helpers',
+    function ($scope, $rootScope, helpers) {
+        $scope.models = {
+            helloAngular: 'I work!'
+        };
 
-//    .controller('LandingPageController', ['$scope', '$rootScope', '$location', '$timeout', 'content',
-//    function ($scope, $rootScope, $location, $timeout, content) {
-//        // authService
-//        // if user is logged redirect to profile page
-//        debugger;
+        $scope.$on('$viewContentLoaded', function () {
+            $('ul.navbar-nav li').removeClass('active');
+            $('ul.navbar-nav li:eq(0)').addClass('active');
+            helpers.setSnivelPosition(-3);
+        });
+    }])
 
-//    }])
-//;
+.controller('MolykoteController', ['$scope', '$rootScope', 'helpers',
+    function ($scope, $rootScope, helpers) {
+        $scope.models = {
+            helloAngular: 'I work!'
+        };
 
+        $scope.$on('$viewContentLoaded', function () {
+            $('ul.navbar-nav li').removeClass('active');
+            $('ul.navbar-nav li:eq(1)').addClass('active');
+            helpers.setSnivelPosition(-2);
+        });
+    }])
 
-var LandingPageController = function ($scope) {
-    $scope.models = {
-        helloAngular: 'I work!'
-    };
-}
+.controller('DCController', ['$scope', '$rootScope','helpers',
+    function ($scope, $rootScope, helpers) {
+        $scope.models = {
+            helloAngular: 'I work!'
+        };
+
+        $scope.$on('$viewContentLoaded', function () {
+            $('ul.navbar-nav li').removeClass('active');
+            $('ul.navbar-nav li:eq(2)').addClass('active');
+            helpers.setSnivelPosition(-1);
+        });
+    }])
+
+.controller('PermabondController', ['$scope', '$rootScope','helpers',
+    function ($scope, $rootScope, helpers) {
+        $scope.models = {
+            helloAngular: 'I work!'
+        };
+
+        $scope.$on('$viewContentLoaded', function () {
+            $('ul.navbar-nav li').removeClass('active');
+            $('ul.navbar-nav li:eq(3)').addClass('active');
+            helpers.setSnivelPosition(0);
+        });
+    }])
+.controller('ProductsController', ['$scope', '$rootScope','helpers',
+    function ($scope, $rootScope, helpers) {
+        $scope.models = {
+            helloAngular: 'I work!'
+        };
+
+        $scope.$on('$viewContentLoaded', function () {
+            $('ul.navbar-nav li').removeClass('active');
+            $('ul.navbar-nav li:eq(4)').addClass('active');
+            helpers.setSnivelPosition(1);
+        });
+    }])
+
+.controller('PaymentController', ['$scope', '$rootScope','helpers',
+    function ($scope, $rootScope, helpers) {
+        $scope.models = {
+            helloAngular: 'I work!'
+        };
+
+        $scope.$on('$viewContentLoaded', function () {
+            $('ul.navbar-nav li').removeClass('active');
+            $('ul.navbar-nav li:eq(5)').addClass('active');
+            helpers.setSnivelPosition(2);
+        });
+    }]);

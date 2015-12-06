@@ -5,6 +5,14 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="DHUModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="30" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Categories">
           <Key>
             <PropertyRef Name="Id" />
@@ -38,10 +46,12 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
+          <Property Name="BrandId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsInStock" Type="bit" Nullable="false" />
           <Property Name="Price" Type="float" />
           <Property Name="CurrencyId" Type="int" />
+          <Property Name="State" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Category_ParentCategory">
           <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
@@ -91,7 +101,20 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Products_Brands">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DHUModelStoreContainer">
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Currencies" EntityType="Self.Currencies" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CurrencyRates" EntityType="Self.CurrencyRates" Schema="dbo" store:Type="Tables" />
@@ -110,6 +133,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Product_Currency" Association="Self.FK_Product_Currency">
             <End Role="Currencies" EntitySet="Currencies" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brands" Association="Self.FK_Products_Brands">
+            <End Role="Brands" EntitySet="Brands" />
             <End Role="Products" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
@@ -162,6 +189,9 @@
           <Property Name="CurrencyId" Type="Int32" />
           <NavigationProperty Name="Category" Relationship="DHUModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="Currency" Relationship="DHUModel.FK_Product_Currency" FromRole="Product" ToRole="Currency" />
+          <Property Name="BrandId" Type="Int32" Nullable="false" />
+          <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Brand" Relationship="DHUModel.FK_Products_Brands" FromRole="Product" ToRole="Brand" />
         </EntityType>
         <EntityContainer Name="DHUEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -182,6 +212,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Product_Currency" Association="DHUModel.FK_Product_Currency">
             <End Role="Currency" EntitySet="Currencies" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="Brands" EntityType="DHUModel.Brand" />
+          <AssociationSet Name="FK_Products_Brands" Association="DHUModel.FK_Products_Brands">
+            <End Role="Brand" EntitySet="Brands" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
         </EntityContainer>
@@ -233,6 +268,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Products" Relationship="DHUModel.FK_Products_Brands" FromRole="Brand" ToRole="Product" />
+        </EntityType>
+        <Association Name="FK_Products_Brands">
+          <End Type="DHUModel.Brand" Role="Brand" Multiplicity="1" />
+          <End Type="DHUModel.Product" Role="Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="BrandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -271,6 +327,8 @@
           <EntitySetMapping Name="Products">
             <EntityTypeMapping TypeName="DHUModel.Product">
               <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
@@ -278,6 +336,15 @@
                 <ScalarProperty Name="IsInStock" ColumnName="IsInStock" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="DHUModel.Brand">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

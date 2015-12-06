@@ -1,5 +1,5 @@
 ﻿* {
-    font-family: 'Oxford';
+    font-family: 'Oxford' !important;
 }
 
 /*Layout*/
@@ -41,8 +41,8 @@
 
 .phones {
     display: inline-block;
-        position: relative;
-        font-size:16px
+    position: relative;
+    font-size: 16px;
 }
 
     .phones ul {
@@ -50,11 +50,63 @@
     }
 
     .phones li {
-        margin-top:10px;
+        margin-top: 10px;
     }
 
     .phones img {
         width: 20px;
         height: 20px;
     }
+
+.navbar {
+    min-height: 40px;
+    -webkit-box-shadow: 0 0 15px rgba(0,0,0,.3);
+    box-shadow: 0 0 15px rgba(0,0,0,.3);
+}
+
+.navbar-default {
+    margin-bottom: 0px;
+}
+
+.navbar-collapse {
+    padding: 0;
+    font-size: 16px;
+}
+
+    .navbar-collapse .nav.navbar-nav a {
+        padding: 10px 15px;
+        text-align: center;
+    }
+
+    .navbar-collapse .nav.navbar-nav li, .nav.navbar-nav {
+        padding: 0 !important;
+    }
+
+        .navbar-collapse .nav.navbar-nav li.active a {
+            background: none !important;
+            color: #0006FF;
+            font-size: 18px;
+            text-shadow: 1px 1px 2px black, 0 0 1em #FBFF03;
+        }
+
+.snivel-wrapper {
+    clear: both;
+    height: 35px;
+    margin-top: -2px;
+    overflow: hidden;
+    position: relative;
+    background: center 1px repeat-x;
+}
+
+.snivel {
+    width:4000px;
+    height: 26px;
+    background: url('Frontend/Images/snivel.png') left top repeat-x;
+    position: absolute;
+    left: 50%;
+}
+
+.navbar-nav > li.active > a:hover, .navbar-nav > li.active > a:focus {
+    opacity:1 !important;
+}
 /*End Layout*/

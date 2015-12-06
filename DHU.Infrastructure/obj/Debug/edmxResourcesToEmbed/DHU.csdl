@@ -45,6 +45,9 @@
     <Property Name="CurrencyId" Type="Int32" />
     <NavigationProperty Name="Category" Relationship="DHUModel.FK_Product_Category" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="Currency" Relationship="DHUModel.FK_Product_Currency" FromRole="Product" ToRole="Currency" />
+    <Property Name="BrandId" Type="Int32" Nullable="false" />
+    <Property Name="State" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Brand" Relationship="DHUModel.FK_Products_Brands" FromRole="Product" ToRole="Brand" />
   </EntityType>
   <EntityContainer Name="DHUEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="Categories" EntityType="Self.Category" />
@@ -65,6 +68,11 @@
     </AssociationSet>
     <AssociationSet Name="FK_Product_Currency" Association="DHUModel.FK_Product_Currency">
       <End Role="Currency" EntitySet="Currencies" />
+      <End Role="Product" EntitySet="Products" />
+    </AssociationSet>
+    <EntitySet Name="Brands" EntityType="DHUModel.Brand" />
+    <AssociationSet Name="FK_Products_Brands" Association="DHUModel.FK_Products_Brands">
+      <End Role="Brand" EntitySet="Brands" />
       <End Role="Product" EntitySet="Products" />
     </AssociationSet>
   </EntityContainer>
@@ -113,6 +121,27 @@
       </Principal>
       <Dependent Role="Product">
         <PropertyRef Name="CurrencyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="true" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="Products" Relationship="DHUModel.FK_Products_Brands" FromRole="Brand" ToRole="Product" />
+  </EntityType>
+  <Association Name="FK_Products_Brands">
+    <End Type="DHUModel.Brand" Role="Brand" Multiplicity="1" />
+    <End Type="DHUModel.Product" Role="Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Brand">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="BrandId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

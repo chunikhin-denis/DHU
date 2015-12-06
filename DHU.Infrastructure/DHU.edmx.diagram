@@ -13,6 +13,8 @@
         <AssociationConnector Association="DHUModel.FK_Product_Category" />
         <AssociationConnector Association="DHUModel.FK_CurrencyRate_Currency" />
         <AssociationConnector Association="DHUModel.FK_Product_Currency" />
+        <EntityTypeShape EntityType="DHUModel.Brand" Width="1.5" PointX="6.375" PointY="0.875" />
+        <AssociationConnector Association="DHUModel.FK_Products_Brands" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
