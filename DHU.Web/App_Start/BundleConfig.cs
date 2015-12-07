@@ -60,7 +60,7 @@ namespace DHU.Web
             #region Angular App
 
             bundles.Add(new ScriptBundle("~/bundles/app").Include(
-                        "~/Scripts/App/Services/Services.js",
+                        "~/Scripts/App/Services.js",
                         "~/Scripts/App/controllers.js",
                         "~/Scripts/App/app.js"
                         ));

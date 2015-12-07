@@ -5,9 +5,21 @@ angular.module('app.controllers', ['app.services'])
 
     .controller('TopController', ['$scope', '$rootScope','helpers',
     function ($scope, $rootScope, helpers) {
-        $scope.models = {
-            helloAngular: 'I work!'
-        };
+
+        if (window.localStorage.opts == undefined)
+        {
+            $scope.opts = helpers.emptyOpts;
+            window.localStorage.opts = $scope.opts;
+        }
+        else
+            $scope.opts = window.localStorage.opts;
+        
+        $scope.opts.IsInTop = true;
+
+        $scope.$watch('opts', function () {
+            window.localStorage.opts = $scope.opts;
+            //reload data
+        });
 
         $scope.$on('$viewContentLoaded', function () {
             $('ul.navbar-nav li').removeClass('active');
