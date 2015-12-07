@@ -30,6 +30,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -235,12 +236,16 @@
     <Content Include="Content\Frontend\Images\dow_corning.jpg" />
     <Content Include="Content\Frontend\Images\header_back.jpg" />
     <Content Include="Content\Frontend\Images\kyivstar.png" />
+    <Content Include="Content\Frontend\Images\list.png" />
+    <Content Include="Content\Frontend\Images\list_active.png" />
     <Content Include="Content\Frontend\Images\Logo.png" />
     <Content Include="Content\Frontend\Images\molykote.jpg" />
     <Content Include="Content\Frontend\Images\molykote_mini.jpg" />
     <Content Include="Content\Frontend\Images\permabond.jpg" />
     <Content Include="Content\Frontend\Images\phone.png" />
     <Content Include="Content\Frontend\Images\snivel.png" />
+    <Content Include="Content\Frontend\Images\tile.png" />
+    <Content Include="Content\Frontend\Images\tile_active.png" />
     <Content Include="Content\Frontend\Images\vodafone.png" />
     <Content Include="Content\Frontend\invoice-print.css" />
     <Content Include="Content\Frontend\invoice-print.min.css" />

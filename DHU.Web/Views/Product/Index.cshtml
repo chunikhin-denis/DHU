@@ -78,6 +78,38 @@
 
 
     <div class="container body-content">
+        <div class="row well height-50 p-0">
+            <div class="input-group col-md-2 float-l">
+                <input type="text" class="form-control" placeholder="Поиск..." id="search">
+            </div>
+            <div class="form-group col-md-2 float-l">
+                <select class="form-control" id="sort">
+                    <option value="abc">По алфавиту</option>
+                    <option value="low">От дешевых к дорогим</option>
+                    <option value="high">От дорогих к дешевым</option>
+                    <option value="inStock">В наличии</option>
+                </select>
+            </div>
+
+            <div class="list-inline onPage col-md-2 pull-right">
+                <div id="list" class="float-l">
+                    <img src="~/Content/Frontend/Images/list.png" />
+                    <img src="~/Content/Frontend/Images/list_active.png" style="display:none;" />
+                </div>
+                <div id="tile" class="float-l">
+                    <img src="~/Content/Frontend/Images/tile.png" style="display:none;" />
+                    <img src="~/Content/Frontend/Images/tile_active.png" />
+                </div>
+            </div>
+            <div class="onPage col-md-2 pull-right">
+                <span class="float-l">Показывать:</span>
+                <ul class="list-inline">
+                    <li>10</li>
+                    <li>20</li>
+                    <li>50</li>
+                </ul>
+            </div>
+        </div>
         <div ng-view></div>
         <hr />
         <footer>

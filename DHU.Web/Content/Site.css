@@ -2,6 +2,14 @@
     font-family: 'Oxford' !important;
 }
 
+.float-l {
+    float:left !important;
+}
+
+.float-r {
+    float:right !important;
+}
+
 /*Layout*/
 .navbar.navbar-inverse {
     background-image: url('Frontend/Images/header_back.jpg');
@@ -109,4 +117,9 @@
 .navbar-nav > li.active > a:hover, .navbar-nav > li.active > a:focus {
     opacity:1 !important;
 }
+
+/* Toolbox */
+
+
+
 /*End Layout*/
