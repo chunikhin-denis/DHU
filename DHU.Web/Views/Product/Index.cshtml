@@ -22,8 +22,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
-    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <link href="~/Content/Site.css" rel="stylesheet" />
 
 </head>
@@ -78,36 +77,41 @@
 
 
     <div class="container body-content">
-        <div class="row well height-50 p-0">
-            <div class="input-group col-md-2 float-l">
+        <div class="row well height-55 p-10">
+            <div class="input-group col-md-3 float-l">
                 <input type="text" class="form-control" placeholder="Поиск..." id="search">
-            </div>
-            <div class="form-group col-md-2 float-l">
-                <select class="form-control" id="sort">
-                    <option value="abc">По алфавиту</option>
-                    <option value="low">От дешевых к дорогим</option>
-                    <option value="high">От дорогих к дешевым</option>
-                    <option value="inStock">В наличии</option>
-                </select>
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span><i class="fa fa-anchor"></i></button>
+                </span>
             </div>
 
-            <div class="list-inline onPage col-md-2 pull-right">
-                <div id="list" class="float-l">
-                    <img src="~/Content/Frontend/Images/list.png" />
-                    <img src="~/Content/Frontend/Images/list_active.png" style="display:none;" />
+            <div class="col-md-6 pull-right">
+                <div class="list-inline onPagepull-right">
+                    <div id="tile" class="pull-right pointer">
+                        <img src="~/Content/Frontend/Images/tile.png" title="Показывать сеткой" style="display:none;" />
+                        <img src="~/Content/Frontend/Images/tile_active.png" title="Показывать сеткой" />
+                    </div>
+                    <div id="list" class="pull-right m-r-5 pointer">
+                        <img src="~/Content/Frontend/Images/list.png" title="Показывать списком" />
+                        <img src="~/Content/Frontend/Images/list_active.png" title="Показывать списком" style="display:none;" />
+                    </div>
                 </div>
-                <div id="tile" class="float-l">
-                    <img src="~/Content/Frontend/Images/tile.png" style="display:none;" />
-                    <img src="~/Content/Frontend/Images/tile_active.png" />
+                <div class="onPage pull-right">
+                    <span class="float-l m-t-2">Показывать:</span>
+                    <ul class="list-inline float-r m-l-5">
+                        <li class="pointer active" title="10 товаров на странице">10</li>
+                        <li class="pointer" title="20 товаров на странице">20</li>
+                        <li class="pointer" title="50 товаров на странице">50</li>
+                    </ul>
                 </div>
-            </div>
-            <div class="onPage col-md-2 pull-right">
-                <span class="float-l">Показывать:</span>
-                <ul class="list-inline">
-                    <li>10</li>
-                    <li>20</li>
-                    <li>50</li>
-                </ul>
+                <div class="form-group pull-right">
+                    <select class="form-control" id="sort">
+                        <option value="abc">По алфавиту</option>
+                        <option value="low">От дешевых к дорогим</option>
+                        <option value="high">От дорогих к дешевым</option>
+                        <option value="inStock">В наличии</option>
+                    </select>
+                </div>
             </div>
         </div>
         <div ng-view></div>

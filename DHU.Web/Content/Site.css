@@ -3,11 +3,19 @@
 }
 
 .float-l {
-    float:left !important;
+    float: left !important;
 }
 
 .float-r {
-    float:right !important;
+    float: right !important;
+}
+
+.height-55 {
+    height: 55px !important;
+}
+
+.pointer {
+    cursor:pointer;
 }
 
 /*Layout*/
@@ -107,7 +115,7 @@
 }
 
 .snivel {
-    width:4000px;
+    width: 4000px;
     height: 26px;
     background: url('Frontend/Images/snivel.png') left top repeat-x;
     position: absolute;
@@ -115,11 +123,28 @@
 }
 
 .navbar-nav > li.active > a:hover, .navbar-nav > li.active > a:focus {
-    opacity:1 !important;
+    opacity: 1 !important;
 }
 
 /* Toolbox */
 
+.row.well {
+    border-radius: 0;
+    background: #e3e3e3;
+}
 
+.onPage li.active {
+    border: 1px solid #A2A2A2;
+    background: #a2a2a2;
+    color: white;
+}
+
+.onPage li {
+    border: 1px solid #D6D6D6;
+}
+
+.onPage {
+    margin: 7px 20px 0px 20px;
+}
 
 /*End Layout*/

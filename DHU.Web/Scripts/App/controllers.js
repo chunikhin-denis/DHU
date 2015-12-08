@@ -6,18 +6,39 @@ angular.module('app.controllers', ['app.services'])
     .controller('TopController', ['$scope', '$rootScope','helpers',
     function ($scope, $rootScope, helpers) {
 
-        if (window.localStorage.opts == undefined)
-        {
-            $scope.opts = helpers.emptyOpts;
-            window.localStorage.opts = $scope.opts;
+        if (helpers.hasOptsSnapshot) {
+            // Restore
+            $scope.opts = helpers.getOptsSnapshot("opts");
         }
-        else
-            $scope.opts = window.localStorage.opts;
+        else {
+            $scope.opts = helpers.emptyOpts;
+            helpers.setOptsSnapshot($scope.opts);
+            
+            //init toolbox
+            helpers.initToolbox();
+
+        }
+
+
+
+
+
+
+
+
+        //if (!localStorage.hasOwnProperty('opts')) {
+        //    $scope.opts = helpers.emptyOpts;
+        //    localStorage.setItem('opts', JSON.stringify($scope.opts));
+        //}
+        //else {
+        //    var retrievedObject = localStorage.getItem('opts');
+        //    $scope.opts = JSON.parse(retrievedObject);
+        //}
         
         $scope.opts.IsInTop = true;
 
         $scope.$watch('opts', function () {
-            window.localStorage.opts = $scope.opts;
+            helpers.setOptsSnapshot($scope.opts);
             //reload data
         });
 

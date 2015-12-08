@@ -3,8 +3,8 @@
 
 var app = angular.module('DHUapp', ['ui.router', 'app.controllers', 'ngRoute']);
 
-app.config(['$routeProvider',
-    function ($routeProvider) {
+app.config(['$routeProvider', '$locationProvider',
+    function ($routeProvider, $locationProvider) {
         $routeProvider
             .when('/Top', {
                 templateUrl: 'Product/Top',
@@ -33,6 +33,12 @@ app.config(['$routeProvider',
             .otherwise({
                 redirectTo: '/Top'
             });
+
+        $locationProvider.html5Mode({
+            enabled: true,
+            requireBase: false
+        });
+
     }])
 
 .run(['$rootScope', 'helpers',
