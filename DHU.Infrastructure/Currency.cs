@@ -17,8 +17,8 @@ namespace DHU.Infrastructure
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Currency()
         {
-            this.CurrencyRates = new HashSet<CurrencyRate>();
             this.Products = new HashSet<Product>();
+            this.CurrencyRates = new HashSet<CurrencyRate>();
         }
     
         public int Id { get; set; }
@@ -26,8 +26,8 @@ namespace DHU.Infrastructure
         public bool IsActive { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CurrencyRate> CurrencyRates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Product> Products { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CurrencyRate> CurrencyRates { get; set; }
     }
 }

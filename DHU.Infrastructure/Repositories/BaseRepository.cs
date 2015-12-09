@@ -14,7 +14,7 @@ namespace DHU.Infrastructure.Repositories
     {
         #region Declarations
 
-        protected readonly DHUEntities _context = null; //DbContext _context = null;
+        protected DHUEntities _context = null; //DbContext _context = null;
 
         /// <summary>
         /// Summary:
@@ -48,6 +48,7 @@ namespace DHU.Infrastructure.Repositories
 
         public virtual IQueryable<T> Get()
         {
+            _context = new DHUEntities();
             return _context.Set<T>();
         }
 

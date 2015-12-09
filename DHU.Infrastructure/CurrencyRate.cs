@@ -16,7 +16,8 @@ namespace DHU.Infrastructure
     {
         public int Id { get; set; }
         public int CurrencyId { get; set; }
-        public double Rate { get; set; }
+        public double BuyRate { get; set; }
+        public double SaleRate { get; set; }
         public System.DateTime Date { get; set; }
     
         public virtual Currency Currency { get; set; }

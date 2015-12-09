@@ -22,13 +22,13 @@ namespace DHU.Infrastructure
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            //throw new UnintentionalCodeFirstException();
         }
     
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Currency> Currencies { get; set; }
-        public virtual DbSet<CurrencyRate> CurrencyRates { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<CurrencyRate> CurrencyRates { get; set; }
     }
 }

@@ -45,9 +45,10 @@ app.config(['$routeProvider', '$locationProvider',
 function ($rootScope, helpers) {
     $rootScope.windowWidth = window.innerWidth;
     $rootScope.windowHeight = window.innerHeight;
+    $rootScope.products = {};
 
-    setTimeout(function () {
-        $rootScope.$apply();
-    }, 200)
+    //setTimeout(function () {
+    //    $rootScope.$apply();
+    //}, 200)
 }]);
 

@@ -22,7 +22,8 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
+    <link href="~/Content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
 
 </head>
@@ -81,12 +82,12 @@
             <div class="input-group col-md-3 float-l">
                 <input type="text" class="form-control" placeholder="Поиск..." id="search">
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span><i class="fa fa-anchor"></i></button>
+                    <button class="btn btn-default" type="button" id="doSearch"><span class="glyphicon glyphicon-search" style="top:3px;"></span></button>
                 </span>
             </div>
 
             <div class="col-md-6 pull-right">
-                <div class="list-inline onPagepull-right">
+                <div class="list-inline viewMode pull-right">
                     <div id="tile" class="pull-right pointer">
                         <img src="~/Content/Frontend/Images/tile.png" title="Показывать сеткой" style="display:none;" />
                         <img src="~/Content/Frontend/Images/tile_active.png" title="Показывать сеткой" />

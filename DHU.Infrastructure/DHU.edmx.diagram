@@ -7,14 +7,14 @@
       <Diagram DiagramId="f822502acf734b3d8547d36169019c83" Name="Diagram1">
         <EntityTypeShape EntityType="DHUModel.Category" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
         <EntityTypeShape EntityType="DHUModel.Currency" Width="1.5" PointX="5.375" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DHUModel.CurrencyRate" Width="1.5" PointX="1.625" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="DHUModel.Product" Width="1.5" PointX="3.625" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="DHUModel.FK_Category_ParentCategory" />
         <AssociationConnector Association="DHUModel.FK_Product_Category" />
-        <AssociationConnector Association="DHUModel.FK_CurrencyRate_Currency" />
         <AssociationConnector Association="DHUModel.FK_Product_Currency" />
         <EntityTypeShape EntityType="DHUModel.Brand" Width="1.5" PointX="6.375" PointY="0.875" />
         <AssociationConnector Association="DHUModel.FK_Products_Brands" />
+        <EntityTypeShape EntityType="DHUModel.CurrencyRate" Width="1.5" PointX="1.25" PointY="4.25" />
+        <AssociationConnector Association="DHUModel.FK_CurrencyRate_Currency" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

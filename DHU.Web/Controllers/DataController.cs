@@ -17,7 +17,7 @@ using DHU.Infrastructure.Interfaces;
 
 namespace DHU.Web.Controllers
 {
-    [RoutePrefix("api")]
+    [RoutePrefix("api/Data")]
     public class DataController : ApiController
     {
         #region Declarations
@@ -35,9 +35,11 @@ namespace DHU.Web.Controllers
 
         #endregion
 
+        [HttpPost]
         public async Task<IHttpActionResult> GetProducts(GetProductModel model)
         {
-            return Json("asd");
+            var data = _productRepository.GetProducts(1);
+            return Json(data.Select(x => x.Title).ToList());
         }
     }
 }

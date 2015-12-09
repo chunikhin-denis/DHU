@@ -16,31 +16,21 @@ angular.module('app.controllers', ['app.services'])
             
             //init toolbox
             helpers.initToolbox();
-
         }
 
-
-
-
-
-
-
-
-        //if (!localStorage.hasOwnProperty('opts')) {
-        //    $scope.opts = helpers.emptyOpts;
-        //    localStorage.setItem('opts', JSON.stringify($scope.opts));
-        //}
-        //else {
-        //    var retrievedObject = localStorage.getItem('opts');
-        //    $scope.opts = JSON.parse(retrievedObject);
-        //}
-        
         $scope.opts.IsInTop = true;
+        $scope.opts.Brand = '';
+        $scope.opts.Search = '';
+        $('#search').val('');
 
-        $scope.$watch('opts', function () {
-            helpers.setOptsSnapshot($scope.opts);
-            //reload data
-        });
+        helpers.setOptsSnapshot($scope.opts);
+        helpers.getProducts($scope.opts);
+        //$scope.$watch('opts', function () {
+        //    helpers.setOptsSnapshot($scope.opts);
+        //    helpers.getProducts($scope.opts);
+
+        //    //reload data
+        //});
 
         $scope.$on('$viewContentLoaded', function () {
             $('ul.navbar-nav li').removeClass('active');

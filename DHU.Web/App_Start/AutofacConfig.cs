@@ -13,6 +13,7 @@ using Autofac.Integration.WebApi;
 using DHU.Infrastructure;
 using DHU.Infrastructure.Interfaces;
 using DHU.Infrastructure.Repositories;
+using DHU.Infrastructure.Services;
 
 namespace DHU.Web
 {
@@ -30,7 +31,7 @@ namespace DHU.Web
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
 
             // Register services
-            // builder.RegisterType<MapLocationService>().As<IService>();
+            builder.RegisterType<CurrencyService>().As<ICurrencyService>();
 
             // Register data context
             builder.RegisterType<DHUEntities>().InstancePerRequest();

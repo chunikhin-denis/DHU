@@ -26,31 +26,32 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
-          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CurrencyRates">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CurrencyId" Type="int" Nullable="false" />
-          <Property Name="Rate" Type="float" Nullable="false" />
+          <Property Name="BuyRate" Type="float" Nullable="false" />
+          <Property Name="SaleRate" Type="float" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Products">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
           <Property Name="CategoryId" Type="int" Nullable="false" />
-          <Property Name="BrandId" Type="int" Nullable="false" />
           <Property Name="IsActive" Type="bit" Nullable="false" />
           <Property Name="IsInStock" Type="bit" Nullable="false" />
           <Property Name="Price" Type="float" />
           <Property Name="CurrencyId" Type="int" />
+          <Property Name="BrandId" Type="int" Nullable="false" />
           <Property Name="State" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="FK_Category_ParentCategory">
@@ -152,7 +153,6 @@
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="ParentId" Type="Int32" />
-          <NavigationProperty Name="Categories1" Relationship="DHUModel.FK_Category_ParentCategory" FromRole="Category" ToRole="Category1" />
           <NavigationProperty Name="Category1" Relationship="DHUModel.FK_Category_ParentCategory" FromRole="Category1" ToRole="Category" />
           <NavigationProperty Name="Products" Relationship="DHUModel.FK_Product_Category" FromRole="Category" ToRole="Product" />
         </EntityType>
@@ -161,20 +161,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
-          <NavigationProperty Name="CurrencyRates" Relationship="DHUModel.FK_CurrencyRate_Currency" FromRole="Currency" ToRole="CurrencyRate" />
           <NavigationProperty Name="Products" Relationship="DHUModel.FK_Product_Currency" FromRole="Currency" ToRole="Product" />
-        </EntityType>
-        <EntityType Name="CurrencyRate">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Double" Nullable="false" />
-          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Currency" Relationship="DHUModel.FK_CurrencyRate_Currency" FromRole="CurrencyRate" ToRole="Currency" />
+          <NavigationProperty Name="CurrencyRates" Relationship="DHUModel.FK_CurrencyRate_Currency" FromRole="Currency" ToRole="CurrencyRate" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -196,7 +186,6 @@
         <EntityContainer Name="DHUEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Categories" EntityType="Self.Category" />
           <EntitySet Name="Currencies" EntityType="Self.Currency" />
-          <EntitySet Name="CurrencyRates" EntityType="Self.CurrencyRate" />
           <EntitySet Name="Products" EntityType="Self.Product" />
           <AssociationSet Name="FK_Category_ParentCategory" Association="DHUModel.FK_Category_ParentCategory">
             <End Role="Category" EntitySet="Categories" />
@@ -206,10 +195,6 @@
             <End Role="Category" EntitySet="Categories" />
             <End Role="Product" EntitySet="Products" />
           </AssociationSet>
-          <AssociationSet Name="FK_CurrencyRate_Currency" Association="DHUModel.FK_CurrencyRate_Currency">
-            <End Role="Currency" EntitySet="Currencies" />
-            <End Role="CurrencyRate" EntitySet="CurrencyRates" />
-          </AssociationSet>
           <AssociationSet Name="FK_Product_Currency" Association="DHUModel.FK_Product_Currency">
             <End Role="Currency" EntitySet="Currencies" />
             <End Role="Product" EntitySet="Products" />
@@ -218,6 +203,11 @@
           <AssociationSet Name="FK_Products_Brands" Association="DHUModel.FK_Products_Brands">
             <End Role="Brand" EntitySet="Brands" />
             <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="CurrencyRates" EntityType="DHUModel.CurrencyRate" />
+          <AssociationSet Name="FK_CurrencyRate_Currency" Association="DHUModel.FK_CurrencyRate_Currency">
+            <End Role="Currency" EntitySet="Currencies" />
+            <End Role="CurrencyRate" EntitySet="CurrencyRates" />
           </AssociationSet>
         </EntityContainer>
         <Association Name="FK_Category_ParentCategory">
@@ -241,18 +231,6 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="CategoryId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_CurrencyRate_Currency">
-          <End Type="DHUModel.Currency" Role="Currency" Multiplicity="1" />
-          <End Type="DHUModel.CurrencyRate" Role="CurrencyRate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Currency">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="CurrencyRate">
-              <PropertyRef Name="CurrencyId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -289,68 +267,91 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CurrencyRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CurrencyId" Type="Int32" Nullable="false" />
+          <Property Name="BuyRate" Type="Double" Nullable="false" />
+          <Property Name="SaleRate" Type="Double" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Currency" Relationship="DHUModel.FK_CurrencyRate_Currency" FromRole="CurrencyRate" ToRole="Currency" />
+        </EntityType>
+        <Association Name="FK_CurrencyRate_Currency">
+          <End Type="DHUModel.Currency" Role="Currency" Multiplicity="1" />
+          <End Type="DHUModel.CurrencyRate" Role="CurrencyRate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Currency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CurrencyRate">
+              <PropertyRef Name="CurrencyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DHUModelStoreContainer" CdmEntityContainer="DHUEntities">
-          <EntitySetMapping Name="Categories">
-            <EntityTypeMapping TypeName="DHUModel.Category">
-              <MappingFragment StoreEntitySet="Categories">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Currencies">
-            <EntityTypeMapping TypeName="DHUModel.Currency">
-              <MappingFragment StoreEntitySet="Currencies">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DHUModelStoreContainer" CdmEntityContainer="DHUEntities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="IsTypeOf(DHUModel.Category)">
+        <MappingFragment StoreEntitySet="Categories">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Currencies">
+      <EntityTypeMapping TypeName="IsTypeOf(DHUModel.Currency)">
+        <MappingFragment StoreEntitySet="Currencies">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="IsTypeOf(DHUModel.Product)">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsInStock" ColumnName="IsInStock" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
+          <ScalarProperty Name="BrandId" ColumnName="BrandId" />
+          <ScalarProperty Name="State" ColumnName="State" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="IsTypeOf(DHUModel.Brand)">
+        <MappingFragment StoreEntitySet="Brands">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
           <EntitySetMapping Name="CurrencyRates">
             <EntityTypeMapping TypeName="DHUModel.CurrencyRate">
               <MappingFragment StoreEntitySet="CurrencyRates">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Products">
-            <EntityTypeMapping TypeName="DHUModel.Product">
-              <MappingFragment StoreEntitySet="Products">
-                <ScalarProperty Name="State" ColumnName="State" />
-                <ScalarProperty Name="BrandId" ColumnName="BrandId" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Title" ColumnName="Title" />
-                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="IsInStock" ColumnName="IsInStock" />
-                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="SaleRate" ColumnName="SaleRate" />
+                <ScalarProperty Name="BuyRate" ColumnName="BuyRate" />
                 <ScalarProperty Name="CurrencyId" ColumnName="CurrencyId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Brands">
-            <EntityTypeMapping TypeName="DHUModel.Brand">
-              <MappingFragment StoreEntitySet="Brands">
-                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -364,7 +365,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

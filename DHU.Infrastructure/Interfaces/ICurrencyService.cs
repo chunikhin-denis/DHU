@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace DHU.Infrastructure.Interfaces
 {
-    public interface IService
+    public interface ICurrencyService
     {
+        void GetLatestRates();
     }
 }
