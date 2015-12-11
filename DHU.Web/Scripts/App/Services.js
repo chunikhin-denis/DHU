@@ -65,17 +65,6 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
                 serviceFactory.getProducts(opts);
             })
 
-            //items per page
-            $('.onPage li').on('click', function (e) {
-                $('.onPage li').removeClass('active');
-                var $li = $(e.target);
-                $li.addClass('active');
-                var opts = serviceFactory.getOptsSnapshot();
-                opts.Take = $li.text();
-                serviceFactory.setOptsSnapshot(opts);
-                serviceFactory.getProducts(opts);
-            })
-
             //change view mode
             $('.viewMode img').on('click', function (e) {
                 var $img = $(e.target);
@@ -88,6 +77,7 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
         var getProducts = function (opts) {
             return $http.post(serviceBase + 'api/Data/GetProducts', JSON.stringify(opts)).success(function (response) {
                 $rootScope.products = response;
+                debugger;
             }).error(function (response) {
                 if (response.status !== 200) {
                     toastr.error(response.message);

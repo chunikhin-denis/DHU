@@ -41,14 +41,38 @@ app.config(['$routeProvider', '$locationProvider',
 
     }])
 
-.run(['$rootScope', 'helpers',
-function ($rootScope, helpers) {
+.run(['$http', '$rootScope', '$location', 'helpers',
+function ($http, $rootScope, $location, helpers) {
     $rootScope.windowWidth = window.innerWidth;
     $rootScope.windowHeight = window.innerHeight;
     $rootScope.products = {};
+    //var today = new Date();
+    //$rootScope.today = today.getDate() + '.' + today.getMonth() + today.getFullYear();
 
-    //setTimeout(function () {
-    //    $rootScope.$apply();
-    //}, 200)
+    var serviceBase = $location.$$url.length > 1 ? $location.$$absUrl.replace($location.$$url, '') + '/' : $location.$$absUrl;
+
+    $rootScope.getCurrencyRates = function () {
+        $http.get(serviceBase + 'api/Data/GetCurrencyRates')
+            .success(function (data, status, headers, config) {
+                $rootScope.rates = data;
+                $rootScope.eur = data['EUR'][1];
+                $rootScope.usd = data['USD'][1];
+            })
+            .error(function (data, status, headers, config) {
+                $rootScope.rates = null;
+            });
+    };
+
+    $rootScope.changePerPage = function (item) {
+        $('.onPage li').removeClass('active');
+        $('.onPage li.' + item).addClass('active');
+        var opts = helpers.getOptsSnapshot();
+        opts.Take = item;
+        helpers.setOptsSnapshot(opts);
+        helpers.getProducts(opts);
+    }
+
+    $rootScope.getCurrencyRates();
+
 }]);
 

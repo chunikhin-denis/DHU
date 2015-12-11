@@ -23,6 +23,10 @@ namespace DHU.Infrastructure
         public Nullable<int> CurrencyId { get; set; }
         public int BrandId { get; set; }
         public string State { get; set; }
+        public string ImagePath { get; set; }
+        public string Description { get; set; }
+        public string Usability { get; set; }
+        public string Packing { get; set; }
     
         public virtual Category Category { get; set; }
         public virtual Currency Currency { get; set; }

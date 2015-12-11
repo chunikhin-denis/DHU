@@ -29,6 +29,7 @@ namespace DHU.Web
 
             // Register repositories
             builder.RegisterType<ProductRepository>().As<IProductRepository>();
+            builder.RegisterType<CurrencyRepository>().As<IRepositoryAsync<CurrencyRate>>();
 
             // Register services
             builder.RegisterType<CurrencyService>().As<ICurrencyService>();

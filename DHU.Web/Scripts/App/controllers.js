@@ -18,6 +18,7 @@ angular.module('app.controllers', ['app.services'])
             helpers.initToolbox();
         }
 
+        $rootScope.pager = new Array(12, 24, 36);
         $scope.opts.IsInTop = true;
         $scope.opts.Brand = '';
         $scope.opts.Search = '';
@@ -25,12 +26,6 @@ angular.module('app.controllers', ['app.services'])
 
         helpers.setOptsSnapshot($scope.opts);
         helpers.getProducts($scope.opts);
-        //$scope.$watch('opts', function () {
-        //    helpers.setOptsSnapshot($scope.opts);
-        //    helpers.getProducts($scope.opts);
-
-        //    //reload data
-        //});
 
         $scope.$on('$viewContentLoaded', function () {
             $('ul.navbar-nav li').removeClass('active');

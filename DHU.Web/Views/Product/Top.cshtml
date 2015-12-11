@@ -1,30 +1,36 @@
-﻿<div>
-    <div class="jumbotron">
-        <h1>ASP.NET</h1>
-        <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-        <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-    </div>
+﻿<div class="row">
+    <div class="col-sm-6 col-xs-12 m-t-25 p-b-20 p-r-5 p-l-5" data-ng-repeat="product in products">
+        <div class="row p-r-0">
+            <div class="row p-r-15 m-t-5">
+                <a href="News/{{news.Id}}" class="no-decoration p-l-0 p-r-0 pull-left m-r-10">
+                    <div class="pull-left label-date absolute m-l-5 m-t-5">
+                        <span class="block f-s-10 oxford blue text-center p-b-3">
+                            {{news.PostedAt | date: 'MMM' | uppercase}}
+                        </span>
+                        <h4 class="block oxford text-center m-t-min-5 bg-white blue f-s-16">
+                            {{news.PostedAt | date: 'dd' }}
+                        </h4>
+                    </div>
+                    <img data-ng-src="{{news.ImagePath}}" class="width-120" style="left:0" />
+                </a>
+                <div class="justify f-s-12">
+                    <a href="/News/{{news.Id}}" class="no-decoration">
+                        <h4 class="oxford m-t-0 text-black"> {{news.Title.length > 12 ? (news.Title.substr(0, 12) + '...' | uppercase) : (news.Title | uppercase)}}</h4>
+                    </a>
+                    <span data-ng-init="loadDescription(news)" data-ng-bind="news.Description"></span>
+                    <span ng-hide="news.IsFullDescription" class="f-s-12">... </span>
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="col-md-4">
-            <h2>Getting started</h2>
-            {{models.helloAngular}}
-            <p>
-                ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-                enables a clean separation of concerns and gives you full control over markup
-                for enjoyable, agile development.
-            </p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Get more libraries</h2>
-            <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-        </div>
-        <div class="col-md-4">
-            <h2>Web Hosting</h2>
-            <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-            <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+            <div class="row m-t-10 p-l-0 p-r-15">
+                <div class="col-md-7 col-sm-6 col-xs-6 m-b-10 p-l-0">
+                    <img data-ng-src="{{product.ImagePath}}" class="float-l" />
+                    <span class="block m-l-30 m-t-5 f-s-10">by <span class="blue">{{news.Author.UserFullName}}</span></span>
+                </div>
+                <div class="col-md-5 col-sm-6 col-xs-6 p-0 m-t-2">
+                    <a href="/News/{{news.Id}}" class="btn btn-sm btn-bg-blue pull-right btn-standart f-s-12 m-t-min-10">Read Full Story</a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
