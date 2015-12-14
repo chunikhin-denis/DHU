@@ -30,6 +30,10 @@
     display: inline-block !important;
 }
 
+.no-decoration {
+    text-decoration:none !important;
+}
+
 /*Layout*/
 .navbar.navbar-inverse {
     background-image: url('Frontend/Images/header_back.jpg');
@@ -169,3 +173,14 @@
 }
 
 /*End Layout*/
+
+/* Product list*/
+
+ul i.fa-database {
+    color: #2727A1;
+}
+
+ul i.fa-cubes {
+    color: #C26D44;
+}
+    /* Product list*/

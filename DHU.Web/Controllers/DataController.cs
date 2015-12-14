@@ -69,8 +69,8 @@ namespace DHU.Web.Controllers
                 State = x.State,
                 ImagePath = x.ImagePath,
                 Description = x.Description,
-                //Usability = x.Usability.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray(),
-                //Packing = x.Packing.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray()
+                Usability = x.Usability.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray(),
+                Packing = x.Packing.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray()
             }).ToList();
             return Json(data);
         }

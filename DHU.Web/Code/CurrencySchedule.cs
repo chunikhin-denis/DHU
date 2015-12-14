@@ -28,7 +28,8 @@ namespace DHU.Web.Code
                 //service.GetLatestRates();
 
                 // Schedule a simple task to run at a specific time
-                Schedule(() => service.GetLatestRates()).ToRunNow().AndEvery(4).Hours();
+                //Schedule(() => service.GetLatestRates()).ToRunNow().AndEvery(4).Hours();
+                Schedule(() => service.GetLatestRates()).ToRunNow().AndEvery(3).Minutes();
                // Schedule(() => Console.WriteLine("Timed Task - Will run every day at 9:15pm: " + DateTime.Now)).ToRunEvery(1).Days().At(21, 15);
             }
         }

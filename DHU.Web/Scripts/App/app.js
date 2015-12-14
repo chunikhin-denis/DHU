@@ -46,6 +46,7 @@ function ($http, $rootScope, $location, helpers) {
     $rootScope.windowWidth = window.innerWidth;
     $rootScope.windowHeight = window.innerHeight;
     $rootScope.products = {};
+    $rootScope.Math = window.Math;
     //var today = new Date();
     //$rootScope.today = today.getDate() + '.' + today.getMonth() + today.getFullYear();
 
