@@ -56,7 +56,10 @@ namespace DHU.Web.Controllers
         [HttpPost]
         public async Task<IHttpActionResult> GetProducts(GetProductModel model)
         {
-            var data = _productRepository.GetProducts(1).AsEnumerable().Select(x => new ProductViewModel()
+            var data = _productRepository.GetProducts(model.Brand, model.Categories, model.Search, model.SortType, model.IsInTop).AsEnumerable();
+
+            int count = data.Count();
+            var products = data.Select(x => new ProductViewModel()
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -71,8 +74,14 @@ namespace DHU.Web.Controllers
                 Description = x.Description,
                 Usability = x.Usability.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray(),
                 Packing = x.Packing.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray()
-            }).ToList();
-            return Json(data);
+            }).Skip(model.Skip >= 0 ? model.Skip : 0).Take(model.Take >= 0 ? model.Take : 10).ToList();
+
+            return Json(new LoadProductsViewModel
+            {
+                Products = products,
+                SummaryCount = count,
+                CountUnderFilter = count,
+            });
         }
 
         [HttpGet]

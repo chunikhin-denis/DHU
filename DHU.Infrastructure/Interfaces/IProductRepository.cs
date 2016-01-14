@@ -8,6 +8,6 @@ namespace DHU.Infrastructure.Interfaces
 {
     public interface IProductRepository : IRepositoryAsync<Product>, IDisposable
     {
-        IQueryable<Product> GetProducts(int categoryId, int take = 10, int skip = 0);
+        IQueryable<Product> GetProducts(string Brand, List<int> Categories, string Search, string SortType, bool IsInTop);
     }
 }

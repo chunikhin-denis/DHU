@@ -21,14 +21,14 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
 
         var emptyOpts = opts;
 
-        function setOptsSnapshot(model) {
-            sessionStorage.opts = angular.toJson(model);
-            serviceFactory.hasOptsSnapshot = true;
-        }
+        //function setOptsSnapshot(model) {
+        //    sessionStorage.opts = angular.toJson(model);
+        //    serviceFactory.hasOptsSnapshot = true;
+        //}
 
-        function getOptsSnapshot(){
-            return angular.fromJson(sessionStorage.opts);
-        }
+        //function getOptsSnapshot(){
+        //    return angular.fromJson(sessionStorage.opts);
+        //}
 
         var setSnivelPosition = function (index) {
             var contWidth = $('.container').width();
@@ -43,10 +43,15 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
                 var text = $('#search').val();
                 if (text.length >= 2) {
                     //do search
-                    var opts = serviceFactory.getOptsSnapshot();
-                    opts.Search = text;
-                    serviceFactory.setOptsSnapshot(opts);
-                    serviceFactory.getProducts(opts);
+                    //var opts = serviceFactory.getOptsSnapshot();
+                    $rootScope.opts.Search = text;
+                    $rootScope.opts.Skip = 0;
+                    //serviceFactory.setOptsSnapshot(opts);
+                    serviceFactory.getProducts($rootScope.opts, function (response) {
+                        $rootScope.products = response.Products;
+                        $rootScope.page = 0;
+                        $rootScope.pagesCount = response.SummaryCount % $rootScope.opts.Take == 0 ? Math.round(response.SummaryCount / $rootScope.opts.Take) : Math.floor(response.SummaryCount / $rootScope.opts.Take) + 1;
+                    });
                 }
                 else {
                     $('#search').addClass('error');
@@ -59,10 +64,15 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
 
             //sorting
             $('select#sort').on('change', function (e) {
-                var opts = serviceFactory.getOptsSnapshot();
-                opts.SortType = $('select#sort').val();
-                serviceFactory.setOptsSnapshot(opts);
-                serviceFactory.getProducts(opts);
+                //var opts = serviceFactory.getOptsSnapshot();
+                $rootScope.opts.SortType = $('select#sort').val();
+                $rootScope.opts.Skip = 0;
+                //serviceFactory.setOptsSnapshot(opts);
+                serviceFactory.getProducts($rootScope.opts, function (response) {
+                    $rootScope.products = response.Products;
+                    $rootScope.page = 0;
+                    $rootScope.pagesCount = response.SummaryCount % $rootScope.opts.Take == 0 ? Math.round(response.SummaryCount / $rootScope.opts.Take) : Math.floor(response.SummaryCount / $rootScope.opts.Take) + 1;
+                });
             })
 
             //change view mode
@@ -74,10 +84,9 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
         }
 
 
-        var getProducts = function (opts) {
+        var getProducts = function (opts, callback) {
             return $http.post(serviceBase + 'api/Data/GetProducts', JSON.stringify(opts)).success(function (response) {
-                $rootScope.products = response;
-                debugger;
+                callback(response);
             }).error(function (response) {
                 if (response.status !== 200) {
                     toastr.error(response.message);
@@ -86,8 +95,8 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
         }
 
         serviceFactory.setSnivelPosition = setSnivelPosition;
-        serviceFactory.setOptsSnapshot = setOptsSnapshot;
-        serviceFactory.getOptsSnapshot = getOptsSnapshot;
+        //serviceFactory.setOptsSnapshot = setOptsSnapshot;
+        //serviceFactory.getOptsSnapshot = getOptsSnapshot;
         serviceFactory.getProducts = getProducts;
         serviceFactory.emptyOpts = emptyOpts;
         serviceFactory.initToolbox = initToolbox;

@@ -14,6 +14,5 @@ namespace DHU.Web.Controllers
         public int Skip { get; set; }
         public string SortType { get; set; }
         public bool IsInTop { get; set; }
-        public bool IsInStock { get; set; }
     }
 }

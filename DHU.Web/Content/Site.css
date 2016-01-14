@@ -154,8 +154,8 @@
 /* Toolbox */
 
 .row.well {
-    border-radius: 0;
-    background: #e3e3e3;
+    border-radius: 0 !important;
+    background: #e3e3e3 !important;
 }
 
 .onPage li.active {
@@ -182,5 +182,15 @@ ul i.fa-database {
 
 ul i.fa-cubes {
     color: #C26D44;
+}
+
+a.page {
+    padding: 3px 6px !important;
+    background: #e3e3e3 !important;
+}
+
+li.active a.page, li.active a:hover, li.active a:focus {
+    background: #a2a2a2 !important;
+    border: 1px solid #a2a2a2 !important;
 }
     /* Product list*/

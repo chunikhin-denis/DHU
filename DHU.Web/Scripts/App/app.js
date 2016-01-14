@@ -67,10 +67,14 @@ function ($http, $rootScope, $location, helpers) {
     $rootScope.changePerPage = function (item) {
         $('.onPage li').removeClass('active');
         $('.onPage li.' + item).addClass('active');
-        var opts = helpers.getOptsSnapshot();
-        opts.Take = item;
-        helpers.setOptsSnapshot(opts);
-        helpers.getProducts(opts);
+        //var opts = helpers.getOptsSnapshot();
+        $rootScope.opts.Take = item;
+        $rootScope.opts.Take = item;
+        //helpers.setOptsSnapshot(opts);
+        helpers.getProducts($rootScope.opts, function (response) {
+            $rootScope.products = response.Products;
+            $rootScope.pagesCount = response.SummaryCount % $rootScope.opts.Take == 0 ? Math.round(response.SummaryCount / $rootScope.opts.Take) : Math.floor(response.SummaryCount / $rootScope.opts.Take) + 1;
+        });
     }
 
     $rootScope.getCurrencyRates();

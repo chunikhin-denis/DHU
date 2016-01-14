@@ -12,17 +12,30 @@ namespace DHU.Infrastructure.Repositories
     {
         public ProductRepository(DHUEntities context) : base(context) { }
 
-        public IQueryable<Product> GetProducts(int categoryId, int take = 10, int skip = 0)
+        public IQueryable<Product> GetProducts(string Brand, List<int> Categories, string Search, string SortType, bool IsInTop)
         {
-            if (categoryId < 1)
+            Search = Search.ToLower();
+            var data = _context.Products.ToList().Where(p => p.IsActive &&
+                                        (String.IsNullOrEmpty(Brand) || p.Brand.Name == Brand) &&
+                                        (Categories == null ? true : Categories.Contains(p.CategoryId)) &&
+                                        (String.IsNullOrEmpty(Search) || p.Brand.Name.ToLower().Contains(Search) || p.Category.Name.ToLower().Contains(Search) || p.Description.ToLower().Contains(Search) || p.Title.ToLower().Contains(Search) || p.Usability.ToLower().Contains(Search)) &&
+                                        (!IsInTop || p.State == "Top") &&
+                                        (SortType == "inStock" ? p.IsInStock : true ));
+            switch(SortType)
             {
-                throw new ArgumentNullException("categoryId");
+                case "inStock":
+                case "abc":
+                    data = data.OrderBy(x => x.Title);
+                    break;
+                case "low":
+                    data = data.OrderBy(x => x.Price);
+                    break;
+                case "high":
+                    data = data.OrderByDescending(x => x.Price);
+                    break;
             }
 
-            skip = skip < 0 ? 0 : skip;
-            take = take < 1 ? 10 : take;
-
-            return _context.Products.Where(p => p.CategoryId == categoryId).OrderBy(x => x.Title).Skip(skip).Take(take).AsQueryable();
+            return data.AsQueryable();
         }
     }
 }
