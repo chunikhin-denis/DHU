@@ -12,22 +12,49 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-12 col-xs-12 m-t-10 p-b-20 height-250 p-l-0 p-r-0" data-ng-repeat="product in products">
+    <div class="col-md-12 col-xs-12 m-t-10 p-b-20 height-250 p-l-0 p-r-0 clear-padding" data-ng-repeat="product in products">
         <div class="row">
             <a href="Product/{{product.Id}}" class="no-decoration p-l-0 p-r-0 pull-left col-md-3 col-xs-12 width-250 height-250">
                 <img data-ng-src="{{product.ImagePath}}" class="float-l" style="max-height:100%; max-width:100%;" />
             </a>
-            <div class="col-md-9 col-xs-12">
+            <div class="col-md-9 col-xs-12 clear-padding pull-right">
                 <a href="/Product/{{product.Id}}" class="float-l no-decoration " style="width: 100%; text-align: center;">
                     <h3 class="m-t-0 m-b-0">{{product.Title | uppercase}}</h3>
                 </a>
-                <div class="col-md-4" data-ng-if="product.Packing.length > 0">
+                <div class="col-md-6 clear-padding" data-ng-if="product.Packing.length > 0">
                     <span class="f-s-16">Фасовка:</span>
-                    <ul class="list-inline" style="width: 300px;">
+                    <ul class="list-inline">
                         <li class="list-group-item f-s-14 width-100 text-center" data-ng-repeat="pack in product.Packing"><i class="fa fa-2x m-r-5 f-s-20" data-ng-class="{ 'fa-database': pack.indexOf('л') > 0, 'fa-cubes': pack.indexOf('г') > 0  }"></i>{{pack}}</li>
                     </ul>
                 </div>
-                <div class="col-md-4 pull-right"></div>
+                <div class="col-md-6 clear-padding">
+                    <div class="buyZone">
+                        <div class="stock">
+                            <span class="fa-checkBox" data-ng-if="product.IsInStock">
+                                <i class="fa fa-check fa-lg">В наличии</i>
+                            </span>
+                            <span class="fa-hourglassBox" data-ng-if="!product.IsInStock">
+                                <i class="fa fa-hourglass-1 fa-lg">Доступно под заказ</i>
+                            </span>
+                            <span class="fa-exclamationBox" data-ng-if=" product.state == 'out' ">
+                                <i class=" fa fa-exclamation-triangle fa-lg">
+                                Нет в наличии</i>
+                            </span>
+                        </div>
+                        <input type="button" class="btn btn-primary" value="Купить"/>
+                    </div>
+                    <div class="priceBlock pull-right">
+                        <div class="originalPrice">
+                            <span data-ng-if="product.CurrencyName == 'USD'" style="margin-right:-15px">$</span>
+                            <span>{{product.Price}}</span>
+                            <span data-ng-if="product.CurrencyName == 'EUR'">€</span>
+                            <span class="currency" data-ng-if="product.CurrencyName == 'UAH'">грн</span>
+                        </div>
+                        <div class="originalUAH pull-right" data-ng-if="product.CurrencyName != 'UAH' && eur != null && usd != null" style=" margin-top: -10px;">
+                            <span>({{(product.Price * (product.CurrencyName == 'EUR' ? eur : usd)).toString().substr(0,5)}} грн)</span>
+                        </div>
+                    </div>
+                </div>
                 <span class="col-md-12 f-s-16 text-justify">{{product.Description}}</span>
             </div>
         </div>

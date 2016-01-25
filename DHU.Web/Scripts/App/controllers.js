@@ -14,7 +14,7 @@ angular.module('app.controllers', ['app.services'])
             helpers.initToolbox();
         }
 
-        $rootScope.pager = new Array(3, 24, 36);
+        $rootScope.pager = new Array(12, 24, 36);
         $rootScope.opts.Take = $rootScope.opts.Take != null ? ($rootScope.pager.indexOf($rootScope.opts.Take) > -1 ? $rootScope.opts.Take : $rootScope.pager[0]) : $rootScope.pager[0];
         $rootScope.opts.IsInTop = true;
         $rootScope.opts.Brand = '';

@@ -31,7 +31,42 @@
 }
 
 .no-decoration {
-    text-decoration:none !important;
+    text-decoration: none !important;
+}
+
+.clear-padding {
+    padding-right:0 !important;
+    padding-left:0 !important;
+}
+
+.fa-check{
+   color: #00C200;
+}
+
+.fa-checkBox {
+    border:1px solid #00C200;
+    border-radius:5px;
+    padding:7px;
+}
+
+.fa-hourglass-1{
+    color: lightgrey;
+}
+
+.fa-hourglassBox {
+    border:1px solid lightgrey;
+    border-radius:5px;
+    padding:7px;
+}
+
+.fa-exclamation-triangle{
+    color: red;
+}
+
+.fa-exclamationBox {
+    border:1px solid red;
+    border-radius:5px;
+    padding:7px;
 }
 
 /*Layout*/
@@ -189,8 +224,23 @@ a.page {
     background: #e3e3e3 !important;
 }
 
-li.active a.page, li.active a:hover, li.active a:focus {
+li.active a.page, li.active a.page:hover, li.active a.page:focus {
     background: #a2a2a2 !important;
     border: 1px solid #a2a2a2 !important;
 }
-    /* Product list*/
+
+.priceBlock .originalPrice {
+    font-size: 45px;
+    color: orange;
+    font-weight: bold;
+}
+
+    .priceBlock .originalPrice .currency {
+        font-size: 30px;
+    }
+
+.priceBlock .originalUAH {
+    color: rgb(44, 65, 133);
+    font-size: 14px;
+}
+/* Product list*/

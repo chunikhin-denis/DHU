@@ -33,7 +33,7 @@ namespace DHU.Infrastructure.Services
             try
             {
                 // Create a request for the URL. 
-                WebRequest request = WebRequest.Create("https://api.privatbank.ua/p24api/pubinfo?exchange&coursid=5");
+                WebRequest request = WebRequest.Create("https://api.privatbank.ua/p24api/pubinfo?json&exchange&coursid=5");
 
                 // Get the response.
                 WebResponse response = request.GetResponse();
