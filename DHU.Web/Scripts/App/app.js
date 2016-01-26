@@ -30,6 +30,10 @@ app.config(['$routeProvider', '$locationProvider',
                 templateUrl: 'Product/PaymentShipping',
                 controller: 'PaymentController'
             })
+            .when("/Details/:id", {
+                templateUrl: 'Product/Details',
+                controller: 'DetailsController',
+            })
             .otherwise({
                 redirectTo: '/Top'
             });

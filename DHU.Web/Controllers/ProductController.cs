@@ -9,8 +9,12 @@ namespace DHU.Web.Controllers
 {
     public class ProductController : Controller
     {
-
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult Details()
         {
             return View();
         }
@@ -37,14 +41,12 @@ namespace DHU.Web.Controllers
 
         public ActionResult Products()
         {
-
             return View();
         }
 
         public ActionResult PaymentShipping()
         {
             return View();
-
         }
     }
 }

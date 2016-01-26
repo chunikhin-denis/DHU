@@ -35,38 +35,39 @@
 }
 
 .clear-padding {
-    padding-right:0 !important;
-    padding-left:0 !important;
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 
-.fa-check{
-   color: #00C200;
+.fa-check {
+    color: #00C200;
 }
 
 .fa-checkBox {
-    border:1px solid #00C200;
-    border-radius:5px;
-    padding:7px;
+    border: 1px solid #ddd;
+    padding: 15px 5px;
 }
 
-.fa-hourglass-1{
+.fa-hourglass-1 {
     color: lightgrey;
 }
 
 .fa-hourglassBox {
-    border:1px solid lightgrey;
-    border-radius:5px;
-    padding:7px;
+    border: 1px solid #ddd;
+    padding: 15px 5px;
 }
 
-.fa-exclamation-triangle{
+.fa-exclamation-triangle {
     color: red;
 }
 
 .fa-exclamationBox {
-    border:1px solid red;
-    border-radius:5px;
-    padding:7px;
+    border: 1px solid #ddd;
+    padding: 15px 5px;
+}
+
+li.list-group-item, button, input[type='button'] {
+    border-radius: 0 !important;
 }
 
 /*Layout*/
@@ -243,4 +244,10 @@ li.active a.page, li.active a.page:hover, li.active a.page:focus {
     color: rgb(44, 65, 133);
     font-size: 14px;
 }
+
+.stock i.fa{
+    width:165px;
+    text-align:center;
+}
+
 /* Product list*/

@@ -1759,6 +1759,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
     <None Include="Views\Product\Molykote.cshtml" />
     <Content Include="Views\Product\PaymentShipping.cshtml" />
     <None Include="Views\Product\Permabond.cshtml" />

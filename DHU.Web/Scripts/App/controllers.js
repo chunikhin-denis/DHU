@@ -56,6 +56,11 @@ angular.module('app.controllers', ['app.services'])
         });
     }])
 
+    .controller('DetailsController', ['$scope', '$rootScope', 'helpers',
+    function ($scope, $rootScope, helpers) {
+        debugger;
+    }])
+
 .controller('MolykoteController', ['$scope', '$rootScope', 'helpers',
     function ($scope, $rootScope, helpers) {
         $rootScope.pager = new Array(10, 20, 50);
