@@ -59,9 +59,11 @@ function ($http, $rootScope, $location, helpers) {
     $rootScope.getCurrencyRates = function () {
         $http.get(serviceBase + 'api/Data/GetCurrencyRates')
             .success(function (data, status, headers, config) {
-                $rootScope.rates = data;
-                $rootScope.eur = data['EUR'][1];
-                $rootScope.usd = data['USD'][1];
+                if (data != null) {
+                    $rootScope.rates = data;
+                    $rootScope.eur = data['EUR'][1];
+                    $rootScope.usd = data['USD'][1];
+                }
             })
             .error(function (data, status, headers, config) {
                 $rootScope.rates = null;

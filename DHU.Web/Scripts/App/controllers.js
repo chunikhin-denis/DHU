@@ -53,12 +53,24 @@ angular.module('app.controllers', ['app.services'])
             $('ul.navbar-nav li').removeClass('active');
             $('ul.navbar-nav li:eq(0)').addClass('active');
             helpers.setSnivelPosition(-3);
+            $('div.filters').show();
         });
     }])
 
-    .controller('DetailsController', ['$scope', '$rootScope', 'helpers',
-    function ($scope, $rootScope, helpers) {
-        debugger;
+    .controller('DetailsController', ['$scope', '$rootScope', '$location', 'helpers',
+    function ($scope, $rootScope, $location, helpers) {
+        var productId = parseInt($location.$$url.substr(9));
+        if (productId < 0)
+            window.location = '/NotFound';
+
+        helpers.getProductById(productId, function (response) {
+            $scope.product = response;
+        });
+
+        $scope.$on('$viewContentLoaded', function () {
+            $('ul.navbar-nav li').removeClass('active');
+            $('div.filters').hide();
+        });
     }])
 
 .controller('MolykoteController', ['$scope', '$rootScope', 'helpers',

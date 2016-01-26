@@ -90,5 +90,32 @@ namespace DHU.Web.Controllers
             return Json(Rates);
         }
 
+        [HttpGet]
+        public async Task<IHttpActionResult> GetProductById(int productId)
+        {
+            if (productId <= 0)
+                return BadRequest();
+
+            var product = _productRepository.Get().FirstOrDefault(x => x.IsActive && x.Id == productId);
+            if (product == null)
+                return BadRequest();
+
+            return Json(new ProductViewModel()
+            {
+                Id = product.Id,
+                Title = product.Title,
+                CategoryName = product.Category.Name,
+                CategoryId = product.CategoryId,
+                IsInStock = product.IsInStock,
+                Price = product.Price,
+                CurrencyName = product.Currency.Name,
+                BrandName = product.Brand.Name,
+                State = product.State,
+                ImagePath = product.ImagePath,
+                Description = product.Description,
+                Usability = product.Usability.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray(),
+                Packing = product.Packing.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray()
+            });
+        }
     }
 }

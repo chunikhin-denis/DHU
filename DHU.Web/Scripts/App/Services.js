@@ -94,10 +94,20 @@ angular.module('app.services', ['ui.router', 'LocalStorageModule', 'app.controll
             });
         }
 
+        var getProductById = function (productId, callback) {
+            return $http.get(serviceBase + 'api/Data/GetProductById?productId=' + productId).success(function (response) {
+                callback(response);
+            }).error(function (response) {
+                if (response.status !== 200) {
+                    toastr.error(response.message);
+                }
+            });
+        }
         serviceFactory.setSnivelPosition = setSnivelPosition;
         //serviceFactory.setOptsSnapshot = setOptsSnapshot;
         //serviceFactory.getOptsSnapshot = getOptsSnapshot;
         serviceFactory.getProducts = getProducts;
+        serviceFactory.getProductById = getProductById;
         serviceFactory.emptyOpts = emptyOpts;
         serviceFactory.initToolbox = initToolbox;
 
