@@ -76,9 +76,9 @@ namespace DHU.Infrastructure.Services
 
         public Dictionary<string, List<double>> GetActualRates()
         {
-            var data = _currencyRepository.Get().OrderByDescending(x => x.Id).Take(2);
-            var usd = data.FirstOrDefault(x => x.Currency.Name == "USD");
-            var eur = data.FirstOrDefault(x => x.Currency.Name == "EUR");
+            var data = _currencyRepository.Get().ToList();
+            var usd = data.LastOrDefault(x => x.Currency.Name == "USD");
+            var eur = data.LastOrDefault(x => x.Currency.Name == "EUR");
             if (usd != null && eur != null)
                 return new Dictionary<string, List<double>>() {
                 { "USD", new  List<double> { usd.BuyRate, usd.SaleRate }},

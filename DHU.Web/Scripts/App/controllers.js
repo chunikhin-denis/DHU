@@ -19,7 +19,6 @@ angular.module('app.controllers', ['app.services'])
         $rootScope.opts.IsInTop = true;
         $rootScope.opts.Brand = '';
         $rootScope.opts.Search = '';
-        $('#search').val('');
 
         //helpers.setOptsSnapshot($scope.opts);
         helpers.getProducts($rootScope.opts, function (response) {

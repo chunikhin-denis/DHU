@@ -1,1 +1,52 @@
-﻿
+﻿<div class="row">
+    <img data-ng-src="{{product.ImagePath}}" class="col-md-5 clear-padding" />
+    <div class="col-md-7 col-xs-12 clear-padding">
+        <h3 class="m-t-0 m-b-0 col-md-12 clear-padding text-center">{{product.Title | uppercase}}</h3>
+        <div class="col-md-6 clear-padding">
+            <div class="stock text-center m-t-25">
+                <span class="fa-checkBox" data-ng-if="product.IsInStock">
+                    <i class="fa fa-check fa-lg m-t-25"> В наличии</i>
+                </span>
+                <span class="fa-hourglassBox" data-ng-if="!product.IsInStock">
+                    <i class="fa fa-clock-o fa-lg m-t-25"> Доступно под заказ</i>
+                </span>
+                <span class="fa-exclamationBox" data-ng-if=" product.state == 'out' ">
+                    <i class=" fa fa-exclamation-triangle fa-lg m-t-25"> Нет в наличии</i>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-6 clear-padding">
+            <div class="width-full priceBlock pull-right">
+                <div class="originalPrice text-center">
+                    <span data-ng-if="product.CurrencyName == 'USD'" style="margin-right:-15px">$</span>
+                    <span>{{product.Price}}</span>
+                    <span data-ng-if="product.CurrencyName == 'EUR'">€</span>
+                    <span class="currency" data-ng-if="product.CurrencyName == 'UAH'">грн</span>
+                </div>
+                <div class="originalUAH  text-center" data-ng-if=" product.currencyname !='UAH' && eur !=null && usd !=null" style=" margin-top: -10px;">
+                    <span>({{(product.Price * (product.CurrencyName == 'EUR' ? eur : usd)).toString().substr(0,5)}} грн)</span>
+                </div>
+                <button class="btn btn-primary width-full m-t-5"><i class="fa fa-shopping-cart fa-lg"> Купить</i></button>
+            </div>
+        </div>
+        <div class="col-md-12 col-xs-12 m-t-15">
+            <div class="col-md-12 clear-padding" data-ng-if="product.Packing.length > 0">
+                <span class="f-s-16">Фасовка:</span>
+                <ul class="list-inline m-l-10">
+                    <li class="list-group-item f-s-14 width-100 text-center m-r-10" data-ng-repeat="pack in product.Packing"><i class="fa fa-2x m-r-5 f-s-20" data-ng-class="{ 'fa-database': pack.indexOf('л') > 0, 'fa-cubes': pack.indexOf('г') > 0  }"></i>{{pack}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 col-xs-12 m-t-15">
+        <p class="legend">Описание</p>
+        <span class="f-s-16 text-justify m-l-10 " style="overflow:hidden">{{product.Description}}</span>
+    </div>
+    <div class="col-md-12 col-xs-12 m-t-15">
+        <p class="legend">Области применения</p>
+        <ul class="list m-l-10 p-l-0" style="list-style:none">
+            <li class=" f-s-14 m-r-10" data-ng-repeat="item in product.Usability"><i class="fa fa-star fa-2x m-r-5 f-s-20"></i>{{item}}</li>
+        </ul>
+    </div>
+
+</div>
