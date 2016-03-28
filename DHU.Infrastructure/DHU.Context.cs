@@ -25,10 +25,14 @@ namespace DHU.Infrastructure
             //throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Category> Categories { get; set; }
-        public virtual DbSet<Currency> Currencies { get; set; }
-        public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
+        public virtual DbSet<Currency> Currencies { get; set; }
         public virtual DbSet<CurrencyRate> CurrencyRates { get; set; }
+        public virtual DbSet<OrderItem> OrderItems { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Package> Packages { get; set; }
+        public virtual DbSet<Prices> Prices1 { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
     }
 }

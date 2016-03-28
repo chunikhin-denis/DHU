@@ -14,22 +14,32 @@ namespace DHU.Infrastructure
     
     public partial class Product
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Product()
+        {
+            this.OrderItems = new HashSet<OrderItem>();
+            this.Prices = new HashSet<Prices>();
+        }
+    
         public int Id { get; set; }
         public string Title { get; set; }
         public int CategoryId { get; set; }
         public bool IsActive { get; set; }
         public bool IsInStock { get; set; }
-        public Nullable<double> Price { get; set; }
-        public Nullable<int> CurrencyId { get; set; }
         public int BrandId { get; set; }
         public string State { get; set; }
+        public string Color { get; set; }
+        public string TemperatureFrom { get; set; }
+        public string TemperatureTo { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
         public string Usability { get; set; }
-        public string Packing { get; set; }
     
-        public virtual Category Category { get; set; }
-        public virtual Currency Currency { get; set; }
         public virtual Brand Brand { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Prices> Prices { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

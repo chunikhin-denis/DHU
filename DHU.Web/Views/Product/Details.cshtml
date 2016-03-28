@@ -19,12 +19,12 @@
             <div class="width-full priceBlock pull-right">
                 <div class="originalPrice text-center">
                     <span data-ng-if="product.CurrencyName == 'USD'" style="margin-right:-15px">$</span>
-                    <span>{{product.Price}}</span>
+                    <span>{{product.Price[0]}}</span>
                     <span data-ng-if="product.CurrencyName == 'EUR'">€</span>
                     <span class="currency" data-ng-if="product.CurrencyName == 'UAH'">грн</span>
                 </div>
                 <div class="originalUAH  text-center" data-ng-if=" product.currencyname !='UAH' && eur !=null && usd !=null" style=" margin-top: -10px;">
-                    <span>({{(product.Price * (product.CurrencyName == 'EUR' ? eur : usd)).toString().substr(0,5)}} грн)</span>
+                    <span>({{(product.Price[0] * (product.CurrencyName == 'EUR' ? eur : usd)).toString().substr(0,5)}} грн)</span>
                 </div>
                 <button class="btn btn-primary width-full m-t-5"><i class="fa fa-shopping-cart fa-lg"> Купить</i></button>
             </div>

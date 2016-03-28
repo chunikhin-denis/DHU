@@ -59,29 +59,37 @@ namespace DHU.Web.Controllers
             var data = _productRepository.GetProducts(model.Brand, model.Categories, model.Search, model.SortType, model.IsInTop).AsEnumerable();
 
             int count = data.Count();
-            var products = data.Select(x => new ProductViewModel()
+            try
             {
-                Id = x.Id,
-                Title = x.Title,
-                CategoryName = x.Category.Name,
-                CategoryId = x.CategoryId,
-                IsInStock = x.IsInStock,
-                Price = x.Price,
-                CurrencyName = x.Currency.Name,
-                BrandName = x.Brand.Name,
-                State = x.State,
-                ImagePath = x.ImagePath,
-                Description = x.Description,
-                Usability = x.Usability.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray(),
-                Packing = x.Packing.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray()
-            }).Skip(model.Skip >= 0 ? model.Skip : 0).Take(model.Take >= 0 ? model.Take : 10).ToList();
+                var products = data.Select(x => new ProductViewModel()
+                {
+                    Id = x.Id,
+                    Title = x.Title,
+                    CategoryName = x.Category.Name,
+                    CategoryId = x.CategoryId,
+                    IsInStock = x.IsInStock,
+                    Price = x.Prices.Min(p => p.Price),
+                    CurrencyName = x.Prices!=null ? x.Prices.FirstOrDefault().Currency.Name: String.Empty,
+                    BrandName = x.Brand.Name,
+                    State = x.State,
+                    ImagePath = x.ImagePath,
+                    Description = x.Description,
+                    Usability = x.Usability.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray(),
+                    Packing = x.Prices!=null ? x.Prices.Select(p => p.Package.PackageName + " " + p.Package.Measurements).ToList() : new List<string>()
+                }).Skip(model.Skip >= 0 ? model.Skip : 0).Take(model.Take >= 0 ? model.Take : 10).ToList();
 
-            return Json(new LoadProductsViewModel
+                return Json(new LoadProductsViewModel
+                {
+                    Products = products,
+                    SummaryCount = count,
+                    CountUnderFilter = count,
+                });
+            }
+            catch (Exception e)
             {
-                Products = products,
-                SummaryCount = count,
-                CountUnderFilter = count,
-            });
+                return BadRequest(e.Message);
+            }
+            
         }
 
         [HttpGet]
@@ -107,14 +115,17 @@ namespace DHU.Web.Controllers
                 CategoryName = product.Category.Name,
                 CategoryId = product.CategoryId,
                 IsInStock = product.IsInStock,
-                Price = product.Price,
-                CurrencyName = product.Currency.Name,
+                Prices = product.Prices != null ? product.Prices.Select(p => p.Price).ToList() : new List<double>(),
+                CurrencyName = product.Prices != null ? product.Prices.FirstOrDefault().Currency.Name : String.Empty,
+                Packing = product.Prices!=null ? product.Prices.Select(p => p.Package.PackageName + " " + p.Package.Measurements).ToList() : new List<string>(),
                 BrandName = product.Brand.Name,
                 State = product.State,
                 ImagePath = product.ImagePath,
                 Description = product.Description,
+                Color = product.Color,
+                TempFrom = product.TemperatureFrom,
+                TempTo = product.TemperatureTo,
                 Usability = product.Usability.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray(),
-                Packing = product.Packing.Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries).ToArray()
             });
         }
     }

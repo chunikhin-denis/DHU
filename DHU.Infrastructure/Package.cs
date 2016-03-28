@@ -12,21 +12,21 @@ namespace DHU.Infrastructure
     using System;
     using System.Collections.Generic;
     
-    public partial class Currency
+    public partial class Package
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Currency()
+        public Package()
         {
-            this.CurrencyRates = new HashSet<CurrencyRate>();
+            this.OrderItems = new HashSet<OrderItem>();
             this.Prices = new HashSet<Prices>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsActive { get; set; }
+        public string PackageName { get; set; }
+        public string Measurements { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CurrencyRate> CurrencyRates { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Prices> Prices { get; set; }
     }

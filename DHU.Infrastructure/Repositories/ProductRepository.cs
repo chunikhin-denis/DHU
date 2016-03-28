@@ -28,10 +28,10 @@ namespace DHU.Infrastructure.Repositories
                     data = data.OrderBy(x => x.Title);
                     break;
                 case "low":
-                    data = data.OrderBy(x => x.Price);
+                    data = data.OrderBy(x => x.Prices.Min(p => p.Price));
                     break;
                 case "high":
-                    data = data.OrderByDescending(x => x.Price);
+                    data = data.OrderByDescending(x => x.Prices.Min(p => p.Price));
                     break;
             }
 

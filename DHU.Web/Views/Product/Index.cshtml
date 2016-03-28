@@ -58,11 +58,11 @@
             <div id="rates" class="inline-block pull-right" data-ng-if="rates != null">
                 <div class="row m-l-10 ">
                     <div class="float-l">$:</div>
-                    <div class="m-l-20">{{rates['USD'][0].toString().substr(0,5)}} / {{rates['USD'][1].toString().substr(0,5)}}</div>
+                    <div class="m-l-20">{{rates['USD'][0] | number:2}} / {{rates['USD'][1] | number:2}}</div>
                 </div>
                 <div class="row m-l-10">
                     <div class="float-l">€:</div>
-                    <div class="m-l-20">{{rates['EUR'][0].toString().substr(0,5)}} / {{rates['EUR'][1].toString().substr(0,5)}}</div>
+                    <div class="m-l-20">{{rates['EUR'][0] | number:2}} / {{rates['EUR'][1] | number:2}}</div>
                 </div>
             </div>
         </div>

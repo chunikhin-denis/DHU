@@ -14,12 +14,16 @@ namespace DHU.Web.Models
         public int CategoryId { get; set; }
         public bool IsInStock { get; set; }
         public Nullable<double> Price { get; set; }
+        public List<double> Prices { get; set; }
         public string CurrencyName { get; set; }
         public string BrandName { get; set; }
         public string State { get; set; }
         public string ImagePath { get; set; }
         public string Description { get; set; }
+        public string Color { get; set; }
+        public string TempFrom { get; set; }
+        public string TempTo { get; set; }
         public string[] Usability { get; set; }
-        public string[] Packing { get; set; }
+        public List<string> Packing { get; set; }
     }
 }

@@ -5,16 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="f822502acf734b3d8547d36169019c83" Name="Diagram1">
-        <EntityTypeShape EntityType="DHUModel.Category" Width="1.5" PointX="0.75" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="DHUModel.Currency" Width="1.5" PointX="5.375" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="DHUModel.Product" Width="1.5" PointX="3.625" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DHUModel.Brand" Width="1.5" PointX="0.75" PointY="4.125" />
+        <EntityTypeShape EntityType="DHUModel.Currency" Width="1.5" PointX="3" PointY="9.875" />
+        <EntityTypeShape EntityType="DHUModel.CurrencyRate" Width="1.5" PointX="5.25" PointY="9.75" />
+        <EntityTypeShape EntityType="DHUModel.OrderItem" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="DHUModel.Order" Width="1.5" PointX="3" PointY="12.625" />
+        <EntityTypeShape EntityType="DHUModel.Package" Width="1.5" PointX="3" PointY="7.375" />
+        <EntityTypeShape EntityType="DHUModel.Prices" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="DHUModel.Product" Width="1.5" PointX="3" PointY="3.25" />
+        <AssociationConnector Association="DHUModel.FK_Products_Brands" />
+        <AssociationConnector Association="DHUModel.FK_CurrencyRate_Currency" />
+        <AssociationConnector Association="DHUModel.FK_Prices_Currencies" />
+        <AssociationConnector Association="DHUModel.FK_OrderItems_Orders" />
+        <AssociationConnector Association="DHUModel.FK_OrderItems_Packages" />
+        <AssociationConnector Association="DHUModel.FK_OrderItems_Products" />
+        <AssociationConnector Association="DHUModel.FK_Prices_Packages" />
+        <AssociationConnector Association="DHUModel.FK_Prices_Products" />
+        <EntityTypeShape EntityType="DHUModel.Category" Width="1.5" PointX="0.625" PointY="1.125" />
         <AssociationConnector Association="DHUModel.FK_Category_ParentCategory" />
         <AssociationConnector Association="DHUModel.FK_Product_Category" />
-        <AssociationConnector Association="DHUModel.FK_Product_Currency" />
-        <EntityTypeShape EntityType="DHUModel.Brand" Width="1.5" PointX="6.375" PointY="0.875" />
-        <AssociationConnector Association="DHUModel.FK_Products_Brands" />
-        <EntityTypeShape EntityType="DHUModel.CurrencyRate" Width="1.5" PointX="1.25" PointY="4.25" />
-        <AssociationConnector Association="DHUModel.FK_CurrencyRate_Currency" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

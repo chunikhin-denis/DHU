@@ -42,13 +42,14 @@
                         </div>
                         <div class="priceBlock pull-right">
                             <div class="originalPrice">
+                                <span>от</span>
                                 <span data-ng-if="product.CurrencyName == 'USD'" style="margin-right:-15px">$</span>
                                 <span>{{product.Price}}</span>
                                 <span data-ng-if="product.CurrencyName == 'EUR'">€</span>
                                 <span class="currency" data-ng-if="product.CurrencyName == 'UAH'">грн</span>
                             </div>
                             <div class="originalUAH pull-right" data-ng-if="product.CurrencyName != 'UAH' && eur != null && usd != null" style=" margin-top: -10px;">
-                                <span>({{(product.Price * (product.CurrencyName == 'EUR' ? eur : usd)).toString().substr(0,5)}} грн)</span>
+                                <span>({{(product.Price * (product.CurrencyName == 'EUR' ? eur : usd)) | number:2}} грн)</span>
                             </div>
                         </div>
                     </div>

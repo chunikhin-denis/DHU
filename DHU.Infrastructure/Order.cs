@@ -12,22 +12,24 @@ namespace DHU.Infrastructure
     using System;
     using System.Collections.Generic;
     
-    public partial class Currency
+    public partial class Order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Currency()
+        public Order()
         {
-            this.CurrencyRates = new HashSet<CurrencyRate>();
-            this.Prices = new HashSet<Prices>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
     
         public int Id { get; set; }
-        public string Name { get; set; }
-        public bool IsActive { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+        public Nullable<System.DateTime> FinishedAt { get; set; }
+        public string TTN { get; set; }
+        public string UserPhone { get; set; }
+        public string UserName { get; set; }
+        public string Address { get; set; }
+        public string Comment { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CurrencyRate> CurrencyRates { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Prices> Prices { get; set; }
+        public virtual ICollection<OrderItem> OrderItems { get; set; }
     }
 }

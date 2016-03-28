@@ -92,6 +92,18 @@
     <Compile Include="Interfaces\IProductRepository.cs" />
     <Compile Include="Interfaces\IRepositoryAsync.cs" />
     <Compile Include="Models\CurrencyJson.cs" />
+    <Compile Include="Order.cs">
+      <DependentUpon>DHU.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItem.cs">
+      <DependentUpon>DHU.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Package.cs">
+      <DependentUpon>DHU.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Prices.cs">
+      <DependentUpon>DHU.tt</DependentUpon>
+    </Compile>
     <Compile Include="Product.cs">
       <DependentUpon>DHU.tt</DependentUpon>
     </Compile>
